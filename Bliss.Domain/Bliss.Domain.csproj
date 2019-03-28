@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Suppliers\" />
     <Folder Include="Payors\" />
     <Folder Include="Patients\" />
     <Folder Include="Providers\Clincians\" />
     <Folder Include="Providers\ClinicianGroups\" />
-    <Folder Include="Servicers\Suppliers\" />
   </ItemGroup>
 
   <ItemGroup>
