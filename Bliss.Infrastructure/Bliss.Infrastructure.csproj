@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bliss.Application\Bliss.Application.csproj" />
+    <ProjectReference Include="..\Bliss.Domain\Bliss.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

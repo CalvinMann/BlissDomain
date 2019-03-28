@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Payors\" />
+    <Folder Include="Patients\" />
+    <Folder Include="Providers\Clincians\" />
+    <Folder Include="Providers\ClinicianGroups\" />
+    <Folder Include="Servicers\Suppliers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bliss.Domain.Core\Bliss.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>
