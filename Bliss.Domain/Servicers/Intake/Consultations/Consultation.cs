@@ -7,6 +7,11 @@ namespace Bliss.Domain.Servicers.Intake.Consultations
 {
     public class Consultation : IAggregateRoot
     {
+        public Consultation()
+        {
+            Id = Guid.NewGuid();
+        }
+
         public Guid Id { private set; get; }
     }
 }
