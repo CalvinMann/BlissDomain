@@ -9,5 +9,10 @@ namespace Bliss.Application.Servicers.Intake.Repositories
     public interface IConsultationWriteOnlyRepository
     {
         Task Create(Consultation consultation);
+
+        Task Update(Consultation consultation);
+
+         Task Delete(Consultation consultation);
+
     }
 }

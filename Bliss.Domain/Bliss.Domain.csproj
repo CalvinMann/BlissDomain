@@ -7,8 +7,6 @@
   <ItemGroup>
     <Folder Include="Servicers\Intake\Shared\" />
     <Folder Include="Suppliers\" />
-    <Folder Include="Payors\" />
-    <Folder Include="Patients\" />
     <Folder Include="Providers\Clincians\" />
     <Folder Include="Providers\ClinicianGroups\" />
   </ItemGroup>

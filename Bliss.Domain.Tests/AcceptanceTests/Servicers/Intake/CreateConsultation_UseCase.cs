@@ -14,14 +14,14 @@ namespace Bliss.Domain.Tests.AcceptanceTests.Servicers.Intake
         [Fact]
         public void Test1()
         {
-            //Create the use case
-            IConsultationWriteOnlyRepository consultationWriteOnlyRepository = new ConsultationsRepository();//In Memory
+            ////Create the use case
+            //IConsultationWriteOnlyRepository consultationWriteOnlyRepository = new ConsultationsRepository();//In Memory
 
-            ICreateConsultation createConsultation = new CreateConsultation(consultationWriteOnlyRepository);
+            //ICreateConsultation createConsultation = new CreateConsultation(consultationWriteOnlyRepository);
 
-            CreateConsultationRequest createConsultationRequest = new CreateConsultationRequest();
+            //CreateConsultationRequest createConsultationRequest = new CreateConsultationRequest();
 
-            Task<CreateConsultationResult> createConsultationResult = createConsultation.Execute(createConsultationRequest);
+            //Task<CreateConsultationResult> createConsultationResult = createConsultation.Execute(createConsultationRequest);
 
         }
     }
