@@ -1,5 +1,5 @@
-﻿using Bliss.Application.Servicers.Intake.Repositories;
-using Bliss.Domain.Servicers.Intake.Consultations;
+﻿using Bliss.Application.Repositories;
+using Bliss.Domain.Consultations;
 using System;
 using System.Collections.Generic;
 using System.Text;

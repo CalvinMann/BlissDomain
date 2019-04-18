@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Servicers\Intake\Shared\" />
-    <Folder Include="Suppliers\" />
-    <Folder Include="Providers\Clincians\" />
-    <Folder Include="Providers\ClinicianGroups\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Bliss.Domain.Core\Bliss.Domain.Core.csproj" />
   </ItemGroup>
 

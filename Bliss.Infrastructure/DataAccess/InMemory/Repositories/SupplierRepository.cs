@@ -1,4 +1,4 @@
-﻿using Bliss.Application.Servicers.Intake.Repositories;
+﻿using Bliss.Application.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;

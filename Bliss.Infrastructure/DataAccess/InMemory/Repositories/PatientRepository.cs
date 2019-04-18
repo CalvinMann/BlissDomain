@@ -1,5 +1,6 @@
-﻿using Bliss.Application.Servicers.Intake.Repositories;
-using Bliss.Domain.Servicers.Intake.Patients;
+﻿using Bliss.Application.Repositories;
+using Bliss.Domain.Patients;
+using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,14 +36,19 @@ namespace Bliss.Infrastructure.DataAccess.InMemory.Repositories
 
         #region Reads
         //Reads
-        public async Task<Patient> Get(Guid id)
+        public Patient Get(Guid id)
         {
-            Patient patient = _context.Patients
+            Patient patient =  _context.Patients
                 .Where(e => e.Id == id)
                 .SingleOrDefault();
 
-            return await Task.FromResult<Patient>(patient);
-        } 
+            return  patient;
+        }
+
+        public Task<Patient> GetPatient(SSN socialSecurityNumber, Name firstName, Name lastName)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

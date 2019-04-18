@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Servicers\Intake\Consultations\Queries\" />
+    <Folder Include="Consultations\Queries\" />
+    <Folder Include="Patients\Commands\" />
+    <Folder Include="Patients\Queries\" />
   </ItemGroup>
 
 </Project>

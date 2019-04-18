@@ -1,5 +1,5 @@
-﻿using Bliss.Domain.Servicers.Intake.Patients;
-using Bliss.Domain.Servicers.Intake.Suppliers;
+﻿using Bliss.Domain.Patients;
+using Bliss.Domain.Suppliers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
