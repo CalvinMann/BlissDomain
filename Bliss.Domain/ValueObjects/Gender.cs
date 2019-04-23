@@ -6,14 +6,14 @@ namespace Bliss.Domain.ValueObjects
 {
     public sealed class Gender
     {
-        private string _text;
+        private string _gender;
 
         public Gender(string gender)
         {
             if (string.IsNullOrWhiteSpace(gender))
                 throw new Exception("The 'Gender' field is required");
 
-            _text = gender;
+            _gender = gender;
         }
 
         public static implicit operator Gender(string gender)
@@ -23,7 +23,7 @@ namespace Bliss.Domain.ValueObjects
 
         public static implicit operator string(Gender gender)
         {
-            return gender._text;
+            return gender._gender;
         }
 
         public override bool Equals(object obj)
@@ -40,10 +40,10 @@ namespace Bliss.Domain.ValueObjects
 
             if (obj is string)
             {
-                return obj.ToString() == _text;
+                return obj.ToString() == _gender;
             }
 
-            return ((Gender)obj)._text == _text;
+            return ((Gender)obj)._gender == _gender;
         }
     }
 }

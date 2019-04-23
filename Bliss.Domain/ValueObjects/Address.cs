@@ -15,6 +15,7 @@ namespace Bliss.Domain.ValueObjects
 
         public Address(string street1, string street2, string city, string state, int zipCode)
         {
+            throw new NotImplementedException(); //Test validations
             //Run validation checks here
             Street1 = street1;
             Street2 = street2;

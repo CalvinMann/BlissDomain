@@ -7,21 +7,21 @@ namespace Bliss.Domain.ValueObjects
 {
     public sealed class SSN
     {
-        private string _text;
+        private string _ssn;
         const string RegExForValidation = @"^\d{3}-\d{2}-\d{4}$";
 
-        public SSN(string text)
+        public SSN(string ssn)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrWhiteSpace(ssn))
                 throw new Exception("The 'SSN' field is required");
 
             Regex regex = new Regex(RegExForValidation);
-            Match match = regex.Match(text);
+            Match match = regex.Match(ssn);
 
             if (!match.Success)
                 throw new Exception("Invalid SSN format.");
 
-            _text = text;
+            _ssn = ssn;
         }
 
         public static implicit operator SSN(string text)
@@ -31,7 +31,7 @@ namespace Bliss.Domain.ValueObjects
 
         public static implicit operator string(SSN ssn)
         {
-            return ssn._text;
+            return ssn._ssn;
         }
     }
 }
