@@ -6,22 +6,27 @@ namespace Bliss.Domain.ValueObjects
 {
     public sealed class Gender
     {
-        private string _gender;
+        private static string genderStr = "|M|F|";
 
-        public Gender(string gender)
+        private char _gender;
+
+        public Gender(char gender)
         {
-            if (string.IsNullOrWhiteSpace(gender))
+            if (char.IsWhiteSpace(gender))
                 throw new Exception("The 'Gender' field is required");
+
+            if ((genderStr.IndexOf(gender.ToString()) > 0) == false)
+                throw new Exception("Gender abv is not valid");
 
             _gender = gender;
         }
 
-        public static implicit operator Gender(string gender)
+        public static implicit operator Gender(char gender)
         {
             return new Gender(gender);
         }
 
-        public static implicit operator string(Gender gender)
+        public static implicit operator char(Gender gender)
         {
             return gender._gender;
         }
@@ -38,11 +43,7 @@ namespace Bliss.Domain.ValueObjects
                 return true;
             }
 
-            if (obj is string)
-            {
-                return obj.ToString() == _gender;
-            }
-
+          
             return ((Gender)obj)._gender == _gender;
         }
     }

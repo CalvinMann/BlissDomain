@@ -20,16 +20,12 @@ namespace Bliss.Domain.Consultations
             return availabilities;
         }
 
-        public void AddRangeAvailability(TimeSpan timeSpan)
+        public void AddAvailability()
         {
             //Create availabilities here
             throw new NotImplementedException();
         }
 
-        public void AddSpecificAvailability(DateTime dateTime)
-        {
-            //Create availabilities here
-            throw new NotImplementedException();
-        }
+      
     }
 }

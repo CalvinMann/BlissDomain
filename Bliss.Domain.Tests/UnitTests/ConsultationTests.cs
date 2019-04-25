@@ -50,7 +50,7 @@ namespace Bliss.Domain.Tests.UnitTests.Intake
         public void CreateConsultationRequest_ThrowsErrorIfNullDTOs()
         {
            
-            Exception ex = Assert.Throws<Exception>(() => new CreateConsultationRequest(null, null, null));
+            Exception ex = Assert.Throws<Exception>(() => new CreateConsultationRequest(null, null));
 
             Assert.Equal(ex.GetType(), typeof(Exception));
         }

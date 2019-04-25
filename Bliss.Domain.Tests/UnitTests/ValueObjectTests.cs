@@ -1,4 +1,6 @@
-﻿using Bliss.Domain.ValueObjects;
+﻿using Bliss.Domain.Patients;
+using Bliss.Domain.ValueObjects;
+using NodaTime;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,29 +13,84 @@ namespace Bliss.Domain.Tests.UnitTests
         [Fact]
         public void CreatedAddressShouldHave_CompanyName_PolicyNumber_Address()
         {
+            string street1 = "Street1";
+            string street2 = "Street2";
+            string city = "Las Vegas";
+            string state = "NV";
+            string zip = "89145";
 
-          
-            Address address = new Address("111 street", "", "Las Vegas", "NV", 98002);
+            Address address = new Address(street1, street2, city, state, zip);
 
-        
+
             //Test for nulls
-            Assert.Equal(insurancePolicy.Address, address);
+            Assert.Equal(address.Street1, street1);
+            Assert.Equal(address.Street2, street2);
+            Assert.Equal(address.City, city);
+            Assert.Equal(address.State, state);
+            Assert.Equal(address.ZipCode, zip);
+        }
+
+
+
+        [Fact]
+        public void Date_shouldhave_day_month_year()
+        {
+            int month = 4;
+            int day = 12;
+            int year = 2019;
+
+            Date date = new Date(day, month, year);
+
+            Assert.Equal(date.Day, day);
+            Assert.Equal(date.Month, month);
+            Assert.Equal(date.Year, year);
+
+
         }
 
         [Fact]
-        public void CreatedInsurancePolicyShouldHave_CompanyName_PolicyNumber_Address()
+        public void Date_shouldthrowerror_ifmonthgreaterthan12()
         {
+            int month = 13; //error here
+            int day = 12;
+            int year = 2019;
 
-            string companyName = "Aetna";
-            PolicyNumber policyNumber = new PolicyNumber("12W67N350112");
-            Address address = new Address("111 street", "", "Las Vegas", "NV", 98002);
+            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
 
-            InsurancePolicy insurancePolicy = new InsurancePolicy(companyName, policyNumber, address);
-
-
-            Assert.Equal(insurancePolicy.CompanyName, companyName);
-            Assert.Equal(insurancePolicy.PolicyNumber, policyNumber);
-            Assert.Equal(insurancePolicy.Address, address);
+            Assert.Equal(ex.GetType(), typeof(Exception));
         }
+
+        [Fact]
+        public void Date_shouldthrowerror_ifdaygreaterthan31()
+        {
+            int month = 10;
+            int day = 32; //error here
+            int year = 2019;
+
+            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
+
+            Assert.Equal(ex.GetType(), typeof(Exception));
+        }
+
+        [Fact]
+        public void Availability_shouldhave_date_zone_timespan()
+        {
+            int month = 4;
+            int day = 12;
+            int year = 2019;
+
+            Date date = new Date(day, month, year);
+            Zone zone = new Zone("America/Los_Angeles");
+            TimeSpan 
+
+            Availability availability = new Availability(date, zone, );
+
+            Assert.Equal(date.Day, day);
+            Assert.Equal(date.Month, month);
+            Assert.Equal(date.Year, year);
+
+
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace Bliss.Application.DTO
     {
         public PatientDTO(string firstName, string lastName
             , string street1, string street2, 
-            string city, string state, int zip,
+            string city, string state, string zip,
             string cellPhoneNumber,string homePhoneNumber,
             string gender, string ssn)
         {
@@ -31,7 +31,7 @@ namespace Bliss.Application.DTO
         public string Street2 { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
-        public int Zip { get; private set; }
+        public string Zip { get; private set; }
         public string CellPhoneNumber { get; private set; }
         public string HomePhoneNumber { get; private set; }
         public string Gender { get; private set; }

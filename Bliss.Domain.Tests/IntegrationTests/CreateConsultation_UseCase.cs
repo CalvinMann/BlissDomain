@@ -26,13 +26,11 @@ namespace Bliss.Domain.Tests.Integration.Servicers.Intake
                 , patientWriteOnlyRepository, patientReadOnlyRepository
                 , providerReadOnlyRepository, supplierReadOnlyRepository);
 
-            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", 98002, "702-3338-0362", "", "male", "539-04-0830");
+            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", "98002", "702-3338-0362", "", "male", "539-04-0830");
 
-            PatientInsuranceCompanyDTO patientInsuranceCompanyDTO = new PatientInsuranceCompanyDTO("Aetna", "555 Aetna St", "P.O. Box 31", "New York", "NY", 89001, "1-800-Customer");
+            PatientInsurancePolicyDTO patientInsurancePolicyDTO = new PatientInsurancePolicyDTO("Aetna", "12345678", "555 Aetna St", "P.O. Box 31", "New York", "NY", 89001, "1-800-Customer");
 
-            PatientInsurancePolicyDTO patientInformationDTO = new PatientInsurancePolicyDTO();
-
-            CreateConsultationRequest createConsultationRequest = new CreateConsultationRequest(patientDTO, patientInsuranceCompanyDTO, patientInformationDTO);
+            CreateConsultationRequest createConsultationRequest = new CreateConsultationRequest(patientDTO, patientInsurancePolicyDTO);
 
             Task<CreateConsultationResult> createConsultationResult = createConsultation.ExecuteAsync(createConsultationRequest);
 
@@ -53,14 +51,14 @@ namespace Bliss.Domain.Tests.Integration.Servicers.Intake
                 , patientWriteOnlyRepository, patientReadOnlyRepository
                 , providerReadOnlyRepository, supplierReadOnlyRepository);
 
-            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", 98002, "702-3338-0362", "", "male", "539-04-0830");
+            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", "98002", "702-3338-0362", "", "male", "539-04-0830");
 
             PatientInsurancePolicyDTO patientInsurancePolicyDTO = new PatientInsurancePolicyDTO("Aetna", "123456789ABC", "555 Aetna St", "P.O. Box 31", "New york", "NY", 89001, "1-800-Customer");
 
 
             CreateConsultationRequest createConsultationRequest = new CreateConsultationRequest(patientDTO, patientInsurancePolicyDTO);
 
-       
+
             Assert.Equal(createConsultationRequest.PatientDTO, patientDTO);
             Assert.Equal(createConsultationRequest.PatientInsurancePolicyDTO, patientInsurancePolicyDTO);
         }

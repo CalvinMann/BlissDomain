@@ -97,15 +97,7 @@ namespace Bliss.Domain.Consultations
             throw new NotImplementedException();
         }
 
-        public SpecificAvailability AddSpecificAvailability()
-        {
-            throw new NotImplementedException();
-        }
-
-        public TimeSpanAvailability AddTimeSpanAvailability()
-        {
-            throw new NotImplementedException();
-        } 
+       
         #endregion
     }
 }

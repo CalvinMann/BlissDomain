@@ -53,7 +53,7 @@ namespace Bliss.Domain.Tests.UnitTests
             string street2 = "Street2";
             string city = "Las Vegas";
             string state = "NV";
-            int zip = 89145;
+            string zip = "89145";
 
             Patient patient = new Patient(firstName, lastName, ssn, gender);
 
@@ -66,6 +66,56 @@ namespace Bliss.Domain.Tests.UnitTests
             Assert.Equal(city, address.City);
             Assert.Equal(state, address.State);
             Assert.Equal(zip, address.ZipCode);
+        }
+
+        [Fact]
+        public void AfterAddingInsurancePolicyTheInformationShouldBeTheSame()
+        {
+            string firstName = "Calvin";
+            string lastName = "Mann";
+            string ssn = "539-04-0830";
+            string gender = "Male";
+
+
+            string companyName = "Aetna";
+            string policyNumber ="12W67N350112";
+            string street1 = "Street1";
+            string street2 = "Street2";
+            string city = "Las Vegas";
+            string state = "NV";
+            string zip = "89145";
+
+            Patient patient = new Patient(firstName, lastName, ssn, gender);
+
+            InsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
+
+            Assert.Equal(1, patient.InsurancePolicies.GetInsurancePolicies().Count);
+
+            Assert.Equal(companyName, insurancePolicy.CompanyName);
+            Assert.Equal(policyNumber, insurancePolicy.PolicyNumber);
+            Assert.Equal(street1, insurancePolicy.Address.Street1);
+            Assert.Equal(street2, insurancePolicy.Address.Street2);
+            Assert.Equal(city, insurancePolicy.Address.City);
+            Assert.Equal(state, insurancePolicy.Address.State);
+            Assert.Equal(zip, insurancePolicy.Address.ZipCode);
+        }
+
+
+        [Fact]
+        public void CreatedInsurancePolicyShouldHave_CompanyName_PolicyNumber_Address_Id()
+        {
+
+            string companyName = "Aetna";
+            PolicyNumber policyNumber = new PolicyNumber("12W67N350112");
+            Address address = new Address("111 street", "", "Las Vegas", "NV", "98002");
+
+            InsurancePolicy insurancePolicy = new InsurancePolicy(companyName, policyNumber, address);
+
+            Assert.NotEqual(insurancePolicy.Id, Guid.Empty);
+
+            Assert.Equal(insurancePolicy.CompanyName, companyName);
+            Assert.Equal(insurancePolicy.PolicyNumber, policyNumber);
+            Assert.Equal(insurancePolicy.Address, address);
         }
     }
 }

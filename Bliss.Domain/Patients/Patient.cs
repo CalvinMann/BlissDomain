@@ -16,6 +16,7 @@ namespace Bliss.Domain.Patients
 
             //Init 
             Addresses = new Addresses();
+            InsurancePolicies = new InsurancePolicies();
 
             //Assign
             Id = Guid.NewGuid();
@@ -35,12 +36,13 @@ namespace Bliss.Domain.Patients
         public SSN SSN { get; private set; }
         public Gender Gender { get; private set; }
         public Addresses Addresses { get; private set; }
+        public InsurancePolicies InsurancePolicies { get; set; }
 
         #endregion
 
         #region Behaviors
         //Behaviors
-        public Address AddAddress(string street1, string street2, string city, string state, int zip)
+        public Address AddAddress(string street1, string street2, string city, State state, ZipCode zip)
         {
 
             Address address = new Address(street1, street2, city, state, zip);
@@ -49,6 +51,17 @@ namespace Bliss.Domain.Patients
 
             return address;
 
+        }
+
+        public InsurancePolicy AddInsurancePolicy(Name companyName, PolicyNumber policyNumber, string street1, string street2, string city, State state, ZipCode zip)
+        {
+            Address address = new Address(street1, street2, city, state, zip);
+
+            InsurancePolicy insurancePolicy = new InsurancePolicy(companyName, policyNumber, address);
+
+            InsurancePolicies.AddPolicy(insurancePolicy);
+
+            return insurancePolicy;
         }
 
         #endregion

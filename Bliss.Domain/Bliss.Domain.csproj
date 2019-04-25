@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NodaTime" Version="2.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Bliss.Domain.Core\Bliss.Domain.Core.csproj" />
   </ItemGroup>
 

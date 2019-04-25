@@ -16,7 +16,6 @@ namespace Bliss.Application.Consultations.Commands
                 throw new Exception("Patient Insurance Policy information needs to be assigned to the request");
 
             PatientDTO = patientDTO;
-            PatientInsuranceCompanyDTO = patientInsuranceCompanyDTO;
             PatientInsurancePolicyDTO = patientInsurancePolicyDTO;
         }
 

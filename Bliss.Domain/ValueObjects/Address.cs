@@ -10,13 +10,18 @@ namespace Bliss.Domain.ValueObjects
         public string Street1 { get; }
         public string Street2 { get; }
         public string City { get; }
-        public string State { get; }
-        public int ZipCode { get; }
+        public State State { get; }
+        public ZipCode ZipCode { get; }
 
-        public Address(string street1, string street2, string city, string state, int zipCode)
+        public Address(string street1, string street2, string city, State state, ZipCode zipCode)
         {
-            throw new NotImplementedException(); //Test validations
-            //Run validation checks here
+            if (string.IsNullOrEmpty(street1))
+                throw new Exception("Stree1 cannot be null");
+
+            if (string.IsNullOrEmpty(city))
+                throw new Exception("City cannot be null");
+
+
             Street1 = street1;
             Street2 = street2;
             City = city;
@@ -28,6 +33,7 @@ namespace Bliss.Domain.ValueObjects
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Street1;
+            yield return Street2;
             yield return City;
             yield return State;
             yield return ZipCode;

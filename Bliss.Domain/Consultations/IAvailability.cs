@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Bliss.Domain.Consultations
 {
-   public interface IAvailability
+    public interface IAvailability
     {
+
+        DateTime Day { get; }
+
+        TimeSpan TimeSpan { get; }
     }
 }
