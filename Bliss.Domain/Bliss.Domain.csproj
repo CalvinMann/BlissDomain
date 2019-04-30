@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Bliss.Domain.Core\Bliss.Domain.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validation\" />
+  </ItemGroup>
+
 </Project>

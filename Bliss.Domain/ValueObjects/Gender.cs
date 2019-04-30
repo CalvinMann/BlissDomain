@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Bliss.Domain.Consultations;
+using Bliss.Domain.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Bliss.Domain.ValueObjects
 {
-    public sealed class Gender
+    public sealed class Gender : ISubmitConsultationValidation
     {
         private static string genderStr = "|M|F|";
 
@@ -12,12 +14,7 @@ namespace Bliss.Domain.ValueObjects
 
         public Gender(char gender)
         {
-            if (char.IsWhiteSpace(gender))
-                throw new Exception("The 'Gender' field is required");
-
-            if ((genderStr.IndexOf(gender.ToString()) > 0) == false)
-                throw new Exception("Gender abv is not valid");
-
+           
             _gender = gender;
         }
 
@@ -45,6 +42,22 @@ namespace Bliss.Domain.ValueObjects
 
           
             return ((Gender)obj)._gender == _gender;
+        }
+
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            if (char.IsWhiteSpace(_gender))
+            {
+                validationErrors.Add(new ValidationError("The 'Gender' field is required", nameof(Gender)));
+                return validationErrors;
+            }
+
+            if ((genderStr.IndexOf(_gender.ToString()) > 0) == false)
+                validationErrors.Add(new ValidationError("Gender abv is not valid", nameof(Gender)));
+
+            return validationErrors;
         }
     }
 }

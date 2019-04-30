@@ -1,11 +1,12 @@
-﻿using Bliss.Domain.Core;
+﻿using Bliss.Domain.Consultations;
+using Bliss.Domain.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Bliss.Domain.ValueObjects
 {
-    public sealed class Address : ValueObject
+    public sealed class Address : ValueObject, ISubmitConsultationValidation
     {
         public string Street1 { get; }
         public string Street2 { get; }
@@ -15,12 +16,7 @@ namespace Bliss.Domain.ValueObjects
 
         public Address(string street1, string street2, string city, State state, ZipCode zipCode)
         {
-            if (string.IsNullOrEmpty(street1))
-                throw new Exception("Stree1 cannot be null");
-
-            if (string.IsNullOrEmpty(city))
-                throw new Exception("City cannot be null");
-
+          
             Street1 = street1;
             Street2 = street2;
             City = city;
@@ -38,6 +34,17 @@ namespace Bliss.Domain.ValueObjects
             yield return ZipCode;
         }
 
-       
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            if (string.IsNullOrEmpty(Street1))
+                validationErrors.Add( new ValidationError("Stree1 cannot be null", nameof(Street1)));
+
+            if (string.IsNullOrEmpty(City))
+                validationErrors.Add(new ValidationError("City cannot be null", nameof(Street1)));
+
+            return validationErrors;
+        }
     }
 }

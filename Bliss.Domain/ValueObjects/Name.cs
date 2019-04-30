@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bliss.Domain.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -44,6 +45,17 @@ namespace Bliss.Domain.ValueObjects
             }
 
             return ((Name)obj)._text == _text;
+        }
+
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            if (string.IsNullOrWhiteSpace(_text))
+                validationErrors.Add(new ValidationError("The 'Name' field is required", nameof(Name)));
+
+          
+            return validationErrors;
         }
     }
 }

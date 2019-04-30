@@ -38,7 +38,7 @@ namespace Bliss.Domain.Tests.Integration.Servicers.Intake
         }
 
         [Fact]
-        public void WhenDTOsAreAssignedToCreateConsultation_Returns_CreateConsultationResult()
+        public void WhenDTOsAreAssignedToCreateConsultation_Returns_CreateConsultationRequest()
         {
             ////Create the use case
             IConsultationWriteOnlyRepository consultationWriteOnlyRepository = null;

@@ -1,4 +1,5 @@
-﻿using Bliss.Domain.Core;
+﻿using Bliss.Domain.Consultations;
+using Bliss.Domain.Core;
 using NodaTime;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Bliss.Domain.ValueObjects
 {
-    public sealed class Zone 
+    public sealed class Zone : ISubmitConsultationValidation
     {
         private string _zone;
 
@@ -18,10 +19,6 @@ namespace Bliss.Domain.ValueObjects
             var provider = DateTimeZoneProviders.Tzdb;
 
             DateTimeZone = provider.GetZoneOrNull(zoneId);
-
-            if (DateTimeZone == null)
-                throw new Exception("ZoneId is incorrect");
-
         }
 
         public static implicit operator Zone(string zone)
@@ -55,6 +52,23 @@ namespace Bliss.Domain.ValueObjects
         }
 
         public DateTimeZone DateTimeZone { get; private set; }
+
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            if (string.IsNullOrEmpty(_zone))
+            {
+                validationErrors.Add(new ValidationError("ZoneId cannot be empty", nameof(ZipCode)));
+                return validationErrors;
+            }
+
+            if (DateTimeZone == null)
+                validationErrors.Add(new ValidationError("ZoneId is incorrect", nameof(Zone)));
+
+         
+            return validationErrors;
+        }
     }
 }
 

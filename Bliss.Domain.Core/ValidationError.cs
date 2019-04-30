@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bliss.Domain
+namespace Bliss.Domain.Core
 {
     public class ValidationError
     {

@@ -10,14 +10,13 @@ namespace Bliss.Domain.Tests.UnitTests
 {
     public class ValueObjectTests
     {
-        [Fact]
-        public void CreatedAddressShouldHave_CompanyName_PolicyNumber_Address()
+        [Theory]
+        [InlineData("Street1", "Street2", "Las Vegas", "NV", "89145")]
+        [InlineData("", "", "", "", "")]
+        public void CreatedAddressShouldHave_CompanyName_PolicyNumber_Address(
+            string street1, string street2, string city, string state, string zip)
         {
-            string street1 = "Street1";
-            string street2 = "Street2";
-            string city = "Las Vegas";
-            string state = "NV";
-            string zip = "89145";
+
 
             Address address = new Address(street1, street2, city, state, zip);
 
@@ -49,15 +48,15 @@ namespace Bliss.Domain.Tests.UnitTests
         }
 
         [Fact]
-        public void Date_shouldthrowerror_ifmonthgreaterthan12()
+        public void Date_shouldthrowerror_ifmonthgreaterthan12_OnValidate()
         {
             int month = 13; //error here
             int day = 12;
             int year = 2019;
 
-            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
+            var validationErrors = new Date(day, month, year).Validate();
 
-            Assert.Equal(ex.GetType(), typeof(Exception));
+            Assert.Single( validationErrors);
         }
 
         [Fact]
@@ -67,9 +66,10 @@ namespace Bliss.Domain.Tests.UnitTests
             int day = 32; //error here
             int year = 2019;
 
-            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
+            var validationErrors = new Date(day, month, year).Validate();
 
-            Assert.Equal(ex.GetType(), typeof(Exception));
+            Assert.Single(validationErrors);
+            Assert.Equal("Day cannot be greater than 31", validationErrors[0].ErrorMessage);
         }
 
         [Fact]

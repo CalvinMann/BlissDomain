@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bliss.Domain.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,13 +11,7 @@ namespace Bliss.Domain.ValueObjects
 
         public ZipCode(string zipCode)
         {
-            //ensure zip is 5 charachers
-            if (string.IsNullOrEmpty(zipCode))
-                throw new Exception("Zipcode cannot be empty");
-
-            if(zipCode.ToCharArray().Length != 5)
-                throw new Exception("Zipcode must be 5 digits long");
-
+            
             _zipCode = zipCode;
         }
 
@@ -48,6 +43,23 @@ namespace Bliss.Domain.ValueObjects
             }
 
             return ((ZipCode)obj)._zipCode == _zipCode;
+        }
+
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            if (string.IsNullOrEmpty(_zipCode))
+            {
+                validationErrors.Add(new ValidationError("Zipcode cannot be empty", nameof(ZipCode)));
+                return validationErrors;
+            }
+
+            if (_zipCode.ToCharArray().Length != 5)
+                validationErrors.Add(new ValidationError("Zipcode must be 5 digits long", nameof(ZipCode)));
+
+
+            return validationErrors;
         }
     }
 }

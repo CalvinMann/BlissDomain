@@ -82,7 +82,7 @@ namespace Bliss.Domain.Tests.UnitTests
 
             Patient patient = new Patient(firstName, lastName, ssn);
 
-            InsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
+            IInsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
 
             Assert.Equal(1, patient.InsurancePolicies.GetInsurancePolicies().Count);
 
@@ -111,6 +111,32 @@ namespace Bliss.Domain.Tests.UnitTests
             Assert.Equal(insurancePolicy.CompanyName, companyName);
             Assert.Equal(insurancePolicy.PolicyNumber, policyNumber);
             Assert.Equal(insurancePolicy.Address, address);
+        }
+
+        [Fact]
+        public void GivenPatientInsuranceIsIncomplete_ValidationShouldReturnValidationError()
+        {
+            string firstName = "Calvin";
+            string lastName = "Mann";
+            string ssn = "539-04-0830";
+
+
+            string companyName = "Aetna";
+            string policyNumber = "12W67N350112";
+            string street1 = "Street1";
+            string street2 = "Street2";
+            string city = "Las Vegas";
+            string state = "NV";
+            string zip = "89145";
+
+            Patient patient = new Patient(firstName, lastName, ssn);
+
+            IInsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
+
+
+
+            Assert.Single(patient.Validate());
+
         }
     }
 }

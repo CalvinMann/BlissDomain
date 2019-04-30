@@ -1,20 +1,18 @@
-﻿using Bliss.Domain.Core;
+﻿using Bliss.Domain.Consultations;
+using Bliss.Domain.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Bliss.Domain.ValueObjects
 {
-    public class PolicyNumber 
+    public class PolicyNumber : ISubmitConsultationValidation
     {
         private string _number;
 
         public PolicyNumber(string number)
         {
-            //Check if a policy number has special traits (ex: lenght, certain # of characters)
-            if (string.IsNullOrWhiteSpace(number))
-                throw new Exception("'Number' field is required");
-
+          
             _number = number;
         }
 
@@ -46,6 +44,17 @@ namespace Bliss.Domain.ValueObjects
             }
 
             return ((PolicyNumber)obj)._number == _number;
+        }
+
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            //Check if a policy number has special traits (ex: lenght, certain # of characters)
+            if (string.IsNullOrWhiteSpace(_number))
+                validationErrors.Add(new ValidationError("'Number' field is required", nameof(PolicyNumber)));
+
+            return validationErrors;
         }
     }
 

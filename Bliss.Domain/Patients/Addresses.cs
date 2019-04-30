@@ -1,4 +1,6 @@
-﻿using Bliss.Domain.ValueObjects;
+﻿using Bliss.Domain.Consultations;
+using Bliss.Domain.Core;
+using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +8,7 @@ using System.Text;
 
 namespace Bliss.Domain.Patients
 {
-    public sealed class Addresses
+    public sealed class Addresses : ISubmitConsultationValidation
     {
         private readonly IList<Address> _addresses;
 
@@ -22,10 +24,14 @@ namespace Bliss.Domain.Patients
             return addresses;
         }
 
-        public void AddAddress(Address address)
+        public Address AddAddress(string street1, string street2, string city, State state, ZipCode zip)
         {
+            Address address = new Address(street1, street2, city, state, zip);
+
             if (DoesDuplicateAddressExist(address) == false)
                 _addresses.Add(address);
+
+            return address;
         }
 
         public void DeleteAddress(Address address)
@@ -42,6 +48,24 @@ namespace Bliss.Domain.Patients
             }
 
             return false;
+        }
+
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            //Check if a policy number has special traits (ex: lenght, certain # of characters)
+            if (_addresses.Count == 0)
+            {
+                validationErrors.Add(new ValidationError("'InsurancePolicy' is required", nameof(_addresses)));
+                return validationErrors;
+            }
+
+            //Check validity of each policy
+            foreach (ISubmitConsultationValidation addressValidation in _addresses)
+                validationErrors.AddRange(addressValidation.Validate());
+
+            return validationErrors;
         }
     }
 }
