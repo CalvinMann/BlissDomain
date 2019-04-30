@@ -21,7 +21,6 @@ namespace Bliss.Domain.ValueObjects
             if (string.IsNullOrEmpty(city))
                 throw new Exception("City cannot be null");
 
-
             Street1 = street1;
             Street2 = street2;
             City = city;
@@ -38,5 +37,7 @@ namespace Bliss.Domain.ValueObjects
             yield return State;
             yield return ZipCode;
         }
+
+       
     }
 }

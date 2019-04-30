@@ -11,7 +11,7 @@ namespace Bliss.Domain.Patients
 
         #region Constructors
 
-        public Patient(Name firstName, Name lastName, SSN ssn, Gender gender)
+        public Patient(Name firstName, Name lastName, SSN ssn)
         {
 
             //Init 
@@ -23,7 +23,6 @@ namespace Bliss.Domain.Patients
             FirstName = firstName;
             LastName = lastName;
             SSN = ssn;
-            Gender = gender;
         }
 
         #endregion
@@ -62,6 +61,11 @@ namespace Bliss.Domain.Patients
             InsurancePolicies.AddPolicy(insurancePolicy);
 
             return insurancePolicy;
+        }
+
+        public void AddGender(Gender gender)
+        {
+            this.Gender = gender;
         }
 
         #endregion

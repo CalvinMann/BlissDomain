@@ -15,9 +15,8 @@ namespace Bliss.Domain.Tests.UnitTests
             string firstName = "Calvin";
             string lastName = "Mann";
             string ssn = "539-04-0830";
-            string gender = "Male";
 
-            Patient patient = new Patient(firstName, lastName, ssn, gender);
+            Patient patient = new Patient(firstName, lastName, ssn);
 
             Assert.NotEqual(patient.Id, Guid.Empty);
         }
@@ -29,16 +28,14 @@ namespace Bliss.Domain.Tests.UnitTests
             string firstName = "Calvin";
             string lastName = "Mann";
             string ssn = "539-04-0830";
-            string gender = "Male";
 
-            Patient patient = new Patient(firstName, lastName, ssn, gender);
+            Patient patient = new Patient(firstName, lastName, ssn);
 
             Assert.NotEqual(patient.Id, Guid.Empty);
 
             Assert.Equal(patient.FirstName, firstName);
             Assert.Equal(patient.LastName, lastName);
             Assert.Equal(patient.SSN, ssn);
-            Assert.Equal(patient.Gender, gender);
         }
 
         [Fact]
@@ -47,7 +44,6 @@ namespace Bliss.Domain.Tests.UnitTests
             string firstName = "Calvin";
             string lastName = "Mann";
             string ssn = "539-04-0830";
-            string gender = "Male";
 
             string street1 = "Street1";
             string street2 = "Street2";
@@ -55,7 +51,7 @@ namespace Bliss.Domain.Tests.UnitTests
             string state = "NV";
             string zip = "89145";
 
-            Patient patient = new Patient(firstName, lastName, ssn, gender);
+            Patient patient = new Patient(firstName, lastName, ssn);
 
             Address address = patient.AddAddress(street1, street2, city, state, zip);
 
@@ -74,7 +70,6 @@ namespace Bliss.Domain.Tests.UnitTests
             string firstName = "Calvin";
             string lastName = "Mann";
             string ssn = "539-04-0830";
-            string gender = "Male";
 
 
             string companyName = "Aetna";
@@ -85,7 +80,7 @@ namespace Bliss.Domain.Tests.UnitTests
             string state = "NV";
             string zip = "89145";
 
-            Patient patient = new Patient(firstName, lastName, ssn, gender);
+            Patient patient = new Patient(firstName, lastName, ssn);
 
             InsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
 

@@ -19,6 +19,7 @@ namespace Bliss.Domain.Consultations
 
         }
 
+
         private Consultation(Guid id, Guid patientId, Guid clincianGroupId, Guid supplierId, IEvaluation evaluation, Availabilities availabilities)
         {
             //assign

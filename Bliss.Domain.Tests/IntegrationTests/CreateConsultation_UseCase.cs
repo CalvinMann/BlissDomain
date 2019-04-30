@@ -26,7 +26,7 @@ namespace Bliss.Domain.Tests.Integration.Servicers.Intake
                 , patientWriteOnlyRepository, patientReadOnlyRepository
                 , providerReadOnlyRepository, supplierReadOnlyRepository);
 
-            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", "98002", "702-3338-0362", "", "male", "539-04-0830");
+            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", "98002", "702-3338-0362", "", 'M', "539-04-0830");
 
             PatientInsurancePolicyDTO patientInsurancePolicyDTO = new PatientInsurancePolicyDTO("Aetna", "12345678", "555 Aetna St", "P.O. Box 31", "New York", "NY", 89001, "1-800-Customer");
 
@@ -51,7 +51,7 @@ namespace Bliss.Domain.Tests.Integration.Servicers.Intake
                 , patientWriteOnlyRepository, patientReadOnlyRepository
                 , providerReadOnlyRepository, supplierReadOnlyRepository);
 
-            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", "98002", "702-3338-0362", "", "male", "539-04-0830");
+            PatientDTO patientDTO = new PatientDTO("Calvin", "Mann", "7105 Hurricane Way", "", "Las Vegas", "NV", "98002", "702-3338-0362", "", 'M', "539-04-0830");
 
             PatientInsurancePolicyDTO patientInsurancePolicyDTO = new PatientInsurancePolicyDTO("Aetna", "123456789ABC", "555 Aetna St", "P.O. Box 31", "New york", "NY", 89001, "1-800-Customer");
 

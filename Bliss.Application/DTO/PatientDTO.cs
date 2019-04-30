@@ -10,7 +10,7 @@ namespace Bliss.Application.DTO
             , string street1, string street2, 
             string city, string state, string zip,
             string cellPhoneNumber,string homePhoneNumber,
-            string gender, string ssn)
+            char gender, string ssn)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -34,7 +34,7 @@ namespace Bliss.Application.DTO
         public string Zip { get; private set; }
         public string CellPhoneNumber { get; private set; }
         public string HomePhoneNumber { get; private set; }
-        public string Gender { get; private set; }
+        public char Gender { get; private set; }
         public string SSN { get; private set; }
     }
 }

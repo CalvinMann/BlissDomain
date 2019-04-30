@@ -3,6 +3,7 @@ using Bliss.Application.Repositories;
 using Bliss.Domain.Patients;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,10 +33,9 @@ namespace Bliss.Application.Consultations.Commands
 
         public async Task<CreateConsultationResult> ExecuteAsync(CreateConsultationRequest createConsultationRequest)
         {
-            //We will want to implement a unit of work
+            Contract.Requires<ArgumentException>(createConsultationRequest != null);
 
-            if (createConsultationRequest == null)
-                throw new Exception("CreateConsultationRequest is null");
+            //We will want to implement a unit of work
 
             //Check for patient
             Patient patient =  await TryGetPatientAsync(createConsultationRequest.PatientDTO);
@@ -68,7 +68,9 @@ namespace Bliss.Application.Consultations.Commands
         private async Task<Patient> CreatePatient(PatientDTO patientDTO)
         {
             //Create patient
-            Patient patient = new Patient(patientDTO.FirstName, patientDTO.LastName, patientDTO.SSN, patientDTO.Gender);
+            Patient patient = new Patient(patientDTO.FirstName, patientDTO.LastName, patientDTO.SSN);
+
+            patient.AddGender(patientDTO.Gender);
 
             patient.AddAddress(patientDTO.Street1, patientDTO.Street2, patientDTO.City, patientDTO.State, patientDTO.Zip);
 
