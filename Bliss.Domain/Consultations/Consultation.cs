@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Bliss.Domain.Consultations
 {
-    public sealed class Consultation : IAggregateRoot
+    public sealed class Consultation : IAggregateRoot, ISubmitConsultationValidation
     {
         private Availabilities _availabilities;
 
@@ -56,11 +56,11 @@ namespace Bliss.Domain.Consultations
         //References to Entities 
         public IEvaluation Evaluation { private set; get; }
 
-        public IReadOnlyCollection<IAvailability> Availabilities
+        public IReadOnlyCollection<Availability> Availabilities
         {
             get
             {
-                IReadOnlyCollection<IAvailability> readOnly = _availabilities.GetAvailabilities();
+                IReadOnlyCollection<Availability> readOnly = _availabilities.GetAvailabilities();
                 return readOnly;
             }
         }
@@ -98,7 +98,25 @@ namespace Bliss.Domain.Consultations
             throw new NotImplementedException();
         }
 
-       
+        public List<ValidationError> Validate()
+        {
+            List<ValidationError> validationErrors = new List<ValidationError>();
+
+            if (Id == null)
+                validationErrors.Add(new ValidationError("'Id' is required", nameof(Id)));
+
+            if (PatientId == null)
+                validationErrors.Add(new ValidationError("'PatientId' is required", nameof(PatientId)));
+
+            if (ClinicianGroupId == null)
+                validationErrors.Add(new ValidationError("'ClinicianGroupId' is required", nameof(ClinicianGroupId)));
+
+            if (SupplierId == null)
+                validationErrors.Add(new ValidationError("'SupplierId' is required", nameof(SupplierId)));
+
+            return validationErrors;
+        }
+
         #endregion
     }
 }

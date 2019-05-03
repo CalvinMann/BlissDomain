@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Bliss.Domain\Bliss.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataAccess\Sql\" />
+  </ItemGroup>
+
 </Project>

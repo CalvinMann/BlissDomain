@@ -1,5 +1,6 @@
 ﻿using Bliss.Application.DTO;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bliss.Application.Consultations.Commands
 {
@@ -19,8 +20,10 @@ namespace Bliss.Application.Consultations.Commands
             PatientInsurancePolicyDTO = patientInsurancePolicyDTO;
         }
 
+        [Required]
         public PatientDTO PatientDTO { get; private set; }
 
+        [Required]
         public PatientInsurancePolicyDTO PatientInsurancePolicyDTO { get; private set; }
     }
 }

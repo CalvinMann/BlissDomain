@@ -1,10 +1,14 @@
-﻿using Bliss.Domain.Patients;
+﻿using Bliss.Domain.Consultations;
+using Bliss.Domain.Patients;
 using Bliss.Domain.ValueObjects;
 using NodaTime;
+using NodaTime.Extensions;
+using NodaTime.Text;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using Duration = Bliss.Domain.ValueObjects.Duration;
 
 namespace Bliss.Domain.Tests.UnitTests
 {
@@ -60,6 +64,18 @@ namespace Bliss.Domain.Tests.UnitTests
         }
 
         [Fact]
+        public void Date_shouldthrowerror_ifmonthlessthan0_OnValidate()
+        {
+            int month = 0; //error here
+            int day = 12;
+            int year = 2019;
+
+            var validationErrors = new Date(day, month, year).Validate();
+
+            Assert.Single(validationErrors);
+        }
+
+        [Fact]
         public void Date_shouldthrowerror_ifdaygreaterthan31()
         {
             int month = 10;
@@ -73,23 +89,38 @@ namespace Bliss.Domain.Tests.UnitTests
         }
 
         [Fact]
+        public void Date_shouldthrowerror_ifdaylessthan1()
+        {
+            int month = 10;
+            int day = 0; //error here
+            int year = 2019;
+
+            var validationErrors = new Date(day, month, year).Validate();
+
+            Assert.Single(validationErrors);
+            Assert.Equal("Day cannot be less than 0", validationErrors[0].ErrorMessage);
+        }
+
+        [Fact]
         public void Availability_shouldhave_date_zone_timespan()
         {
-            //int month = 4;
-            //int day = 12;
-            //int year = 2019;
+            int month = 4;
+            int day = 12;
+            int year = 2019;
 
-            //Date date = new Date(day, month, year);
-            //Zone zone = new Zone("America/Los_Angeles");
-            
-            //LocalTime startTime = new LocalTime(10,)
+            Date date = new Date(day, month, year);
+            Zone zone = new Zone("America/Los_Angeles");
+            Time startTime = new Time(9, 0, 0); //9am
+            Duration duration = new Duration(0, 0, 0, 0, 1, 0, 0);
+            Availability availability = new Availability(date, zone, startTime, duration);
 
-            //Availability availability = new Availability(date, zone, );
 
-            //Assert.Equal(date.Day, day);
-            //Assert.Equal(date.Month, month);
-            //Assert.Equal(date.Year, year);
 
+            //var zone = DateTimeZoneProviders.Tzdb["Europe/London"];
+            //var clock = SystemClock.Instance.InZone(zone);
+            //var now = clock.GetCurrentZonedDateTime();
+            //var pattern = ZonedDateTimePattern.ExtendedFormatOnlyIso;
+            //Console.WriteLine(pattern.Format(now));
 
         }
 

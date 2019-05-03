@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Bliss.Application.DTO
@@ -25,8 +26,12 @@ namespace Bliss.Application.DTO
             SSN = ssn;
         }
 
+        [Required]
         public string FirstName { get; private set; }
+        [Required]
         public string LastName { get; private set; }
+        [Required]
+        public string SSN { get; private set; }
         public string Street1 { get; private set; }
         public string Street2 { get; private set; }
         public string City { get; private set; }
@@ -35,6 +40,6 @@ namespace Bliss.Application.DTO
         public string CellPhoneNumber { get; private set; }
         public string HomePhoneNumber { get; private set; }
         public char Gender { get; private set; }
-        public string SSN { get; private set; }
+
     }
 }

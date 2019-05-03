@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bliss.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -7,25 +8,31 @@ namespace Bliss.Domain.Consultations
 {
     public sealed class Availabilities
     {
-        private readonly IList<IAvailability> _availabilities;
+        private readonly IList<Availability> _availabilities;
 
         public Availabilities()
         {
-            _availabilities = new List<IAvailability>();
+            _availabilities = new List<Availability>();
         }
 
-        public IReadOnlyCollection<IAvailability> GetAvailabilities()
+        public IReadOnlyCollection<Availability> GetAvailabilities()
         {
-            IReadOnlyCollection<IAvailability> availabilities = new ReadOnlyCollection<IAvailability>(_availabilities);
+            IReadOnlyCollection<Availability> availabilities = new ReadOnlyCollection<Availability>(_availabilities);
             return availabilities;
         }
 
-        public void AddAvailability()
+        public Availability AddAvailability(Date date, Zone zone, Time startTime, Duration duration)
         {
-            //Create availabilities here
+            Availability availability = new Availability(date, zone, startTime, duration);
+
+            return availability;
+        }
+
+        public void RemoveAvailability(Guid id)
+        {
             throw new NotImplementedException();
         }
 
-      
+
     }
 }

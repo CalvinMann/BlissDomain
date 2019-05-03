@@ -82,7 +82,7 @@ namespace Bliss.Domain.Tests.UnitTests
 
             Patient patient = new Patient(firstName, lastName, ssn);
 
-            IInsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
+            InsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
 
             Assert.Equal(1, patient.InsurancePolicies.GetInsurancePolicies().Count);
 
@@ -131,9 +131,7 @@ namespace Bliss.Domain.Tests.UnitTests
 
             Patient patient = new Patient(firstName, lastName, ssn);
 
-            IInsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
-
-
+            InsurancePolicy insurancePolicy = patient.AddInsurancePolicy(companyName, policyNumber, street1, street2, city, state, zip);
 
             Assert.Single(patient.Validate());
 

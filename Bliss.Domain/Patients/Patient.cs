@@ -13,6 +13,8 @@ namespace Bliss.Domain.Patients
 
         #region Constructors
 
+        private Patient() { }
+
         public Patient(Name firstName, Name lastName, SSN ssn)
         {
 

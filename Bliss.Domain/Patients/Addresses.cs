@@ -34,11 +34,6 @@ namespace Bliss.Domain.Patients
             return address;
         }
 
-        public void DeleteAddress(Address address)
-        {
-            throw new NotImplementedException();
-        }
-
         private bool DoesDuplicateAddressExist(Address address)
         {
             foreach(Address addressInList in _addresses)
@@ -57,7 +52,7 @@ namespace Bliss.Domain.Patients
             //Check if a policy number has special traits (ex: lenght, certain # of characters)
             if (_addresses.Count == 0)
             {
-                validationErrors.Add(new ValidationError("'InsurancePolicy' is required", nameof(_addresses)));
+                validationErrors.Add(new ValidationError("'Address' is required", nameof(_addresses)));
                 return validationErrors;
             }
 
