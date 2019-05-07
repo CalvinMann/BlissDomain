@@ -17,6 +17,8 @@ namespace Bliss.Domain.Evaluations.Components.Medication
 
         Dosage Dosage { get; }
 
-        DosageFrequency DosageFrequency { get; }
+        Frequency DosageFrequency { get; }
     }
+
+
 }

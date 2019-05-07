@@ -21,14 +21,14 @@ namespace Bliss.Domain.Evaluations.Components.Medication
 
         public string Name { get; private set; }
 
-        public string ManufacturingCompany { get; private set; }
+        public string ManufacturingCompany { get;  set; }
 
-        public MedicationType MedicationType { get; private set; }
+        public MedicationType MedicationType { get; set; }
 
-        public Date ExpirationDate { get; private set; }
+        public Date ExpirationDate { get;  set; }
 
-        public Dosage Dosage { get; private set; }
+        public Dosage Dosage { get;  set; }
 
-
+        public Frequency DosageFrequency { get;  set; }
     }
 }

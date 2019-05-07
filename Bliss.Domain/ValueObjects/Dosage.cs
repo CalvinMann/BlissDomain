@@ -9,7 +9,8 @@ namespace Bliss.Domain.ValueObjects
     {
         public Dosage(int quantity, UnitsNet.Units.VolumeUnit volumnUnit )
         {
-
+            Quantity = quantity;
+            VolumnUnit = volumnUnit;
         }
 
         public int Quantity { get; private set; }
