@@ -8,22 +8,29 @@ namespace Bliss.Domain.Consultations
 {
     public sealed class Availabilities
     {
-        private readonly IList<Availability> _availabilities;
+        private readonly IList<IAvailability> _availabilities;
 
         public Availabilities()
         {
-            _availabilities = new List<Availability>();
+            _availabilities = new List<IAvailability>();
         }
 
-        public IReadOnlyCollection<Availability> GetAvailabilities()
+        public IReadOnlyCollection<IAvailability> GetAvailabilities()
         {
-            IReadOnlyCollection<Availability> availabilities = new ReadOnlyCollection<Availability>(_availabilities);
+            IReadOnlyCollection<IAvailability> availabilities = new ReadOnlyCollection<IAvailability>(_availabilities);
             return availabilities;
         }
 
-        public Availability AddAvailability(Date date, Zone zone, Time startTime, Duration duration)
+        public IAvailability AddAvailability(Date date, Zone zone, Time startTime, Duration duration)
         {
-            Availability availability = new Availability(date, zone, startTime, duration);
+            IAvailability availability = new Availability(date, zone, startTime, duration);
+
+            IAvailability existingAvailability = Find(availability);
+
+            if (existingAvailability == null)
+                _availabilities.Add(availability);
+            else
+                return existingAvailability;
 
             return availability;
         }
@@ -33,6 +40,15 @@ namespace Bliss.Domain.Consultations
             throw new NotImplementedException();
         }
 
+        private IAvailability Find(IAvailability availability)
+        {
+            foreach (Availability availabilityInList in _availabilities)
+            {
+                if (availabilityInList.Equals(availability))
+                    return availabilityInList;
+            }
 
+            return null;
+        }
     }
 }

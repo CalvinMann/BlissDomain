@@ -32,6 +32,10 @@ namespace Bliss.Domain.ValueObjects
         //these are the fields we use to test equality
         protected override IEnumerable<object> GetEqualityComponents()
         {
+            yield return Years;
+            yield return Months;
+            yield return Weeks;
+            yield return Days;
             yield return Hour;
             yield return Min;
             yield return Sec;

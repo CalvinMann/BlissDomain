@@ -10,6 +10,8 @@ namespace Bliss.Domain.Patients
 {
     public sealed class Patient : IAggregateRoot, ISubmitConsultationValidation
     {
+        private Addresses _addresses;
+        private InsurancePolicies _insurancePolicies;
 
         #region Constructors
 
@@ -19,8 +21,8 @@ namespace Bliss.Domain.Patients
         {
 
             //Init 
-            Addresses = new Addresses();
-            InsurancePolicies = new InsurancePolicies();
+            _addresses = new Addresses();
+            _insurancePolicies = new InsurancePolicies();
 
             //Assign
             Id = Guid.NewGuid();
@@ -31,28 +33,44 @@ namespace Bliss.Domain.Patients
 
         #endregion
 
-        #region Fields
+        #region References
 
         public Guid Id { get; private set; }
         public Name FirstName { get; private set; }
         public Name LastName { get; private set; }
         public SSN SSN { get; private set; }
         public Gender Gender { get; private set; }
-        public Addresses Addresses { get; private set; }
-        public InsurancePolicies InsurancePolicies { get; set; }
+
+        public IReadOnlyCollection<Address> Addresses
+        {
+            get
+            {
+                IReadOnlyCollection<Address> readOnly = _addresses.GetAddresses();
+                return readOnly;
+            }
+        }
+
+        public IReadOnlyCollection<IInsurancePolicy> InsurancePolicies
+        {
+            get
+            {
+                IReadOnlyCollection<IInsurancePolicy> readOnly = _insurancePolicies.GetInsurancePolicies();
+                return readOnly;
+            }
+        }
 
         #endregion
 
         #region Behaviors
         //Behaviors
-        public Address AddAddress(string street1, string street2, string city, State state, ZipCode zip)
+        public void AddAddress(Address address)
         {
-           return Addresses.AddAddress(street1, street2, city, state, zip);
+            _addresses.AddAddress(address);
         }
 
-        public InsurancePolicy AddInsurancePolicy(Name companyName, PolicyNumber policyNumber, string street1, string street2, string city, State state, ZipCode zip)
+        public void AddInsurancePolicy(Name companyName, PolicyNumber policyNumber, Address address)
         {
-            return InsurancePolicies.AddPolicy(companyName, policyNumber, street1, street2, city, state, zip); ;
+             _insurancePolicies.AddPolicy(companyName, policyNumber, address); 
         }
 
         public void AddGender(Gender gender)
@@ -79,10 +97,10 @@ namespace Bliss.Domain.Patients
             if (Gender == null)
                 validationErrors.Add(new ValidationError("'Gender' is required", nameof(Gender)));
 
-            ISubmitConsultationValidation addressValidation = this.Addresses as ISubmitConsultationValidation;
+            ISubmitConsultationValidation addressValidation = this._addresses as ISubmitConsultationValidation;
             validationErrors.AddRange(addressValidation.Validate());
 
-            ISubmitConsultationValidation insuranceValidation = this.InsurancePolicies as ISubmitConsultationValidation;
+            ISubmitConsultationValidation insuranceValidation = this._insurancePolicies as ISubmitConsultationValidation;
             validationErrors.AddRange(insuranceValidation.Validate());
            
 

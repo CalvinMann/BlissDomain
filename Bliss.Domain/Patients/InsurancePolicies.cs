@@ -8,76 +8,59 @@ using System.Text;
 
 namespace Bliss.Domain.Patients
 {
-    
-    public sealed class InsurancePolicies : ISubmitConsultationValidation
+
+    internal sealed class InsurancePolicies : ISubmitConsultationValidation
 
     {
-        private readonly List<InsurancePolicy> _policies;
+        private readonly List<IInsurancePolicy> _policies;
 
         public InsurancePolicies()
         {
-            _policies = new List<InsurancePolicy>();
+            _policies = new List<IInsurancePolicy>();
         }
 
         //Readonly enforces us to add the policies via the behavior methods below
-        public IReadOnlyCollection<InsurancePolicy> GetInsurancePolicies()
+        public IReadOnlyCollection<IInsurancePolicy> GetInsurancePolicies()
         {
-            IReadOnlyCollection<InsurancePolicy> policies = new ReadOnlyCollection<InsurancePolicy>(_policies);
+            IReadOnlyCollection<IInsurancePolicy> policies = new ReadOnlyCollection<IInsurancePolicy>(_policies);
             return policies;
         }
 
-        public InsurancePolicy AddPolicy(Name companyName, PolicyNumber policyNumber, string street1, string street2, string city, State state, ZipCode zip)
-        {
-            Address address = new Address(street1, street2, city, state, zip);
-
-            InsurancePolicy policy = new InsurancePolicy(companyName, policyNumber, address);
-
-            InsurancePolicy existingPolicy = Find(policy);
+        public void AddPolicy(Name companyName, PolicyNumber policyNumber, Address address)
+        { 
+            IInsurancePolicy existingPolicy = Find(companyName, policyNumber);
 
             if (existingPolicy == null)
-                _policies.Add(policy);
-            else
-                return existingPolicy;
+                _policies.Add( new InsurancePolicy(companyName, policyNumber, address));
 
-            return policy;
         }
 
         public void DeletePolicy(Guid policyId)
         {
-            InsurancePolicy existingPolicy = Find(policyId);
+            IInsurancePolicy existingPolicy = Find(policyId);
 
             if (existingPolicy != null)
                 _policies.Remove(existingPolicy);
             
         }
 
-        private bool DoesPolicyExist(InsurancePolicy policy)
-        {
-            foreach (InsurancePolicy policyInList in _policies)
-            {
-                if (policyInList.Equals(policy))
-                    return true;
-            }
 
-            return false;
-        }
-
-        private InsurancePolicy Find(Guid policyId)
+        private IInsurancePolicy Find(Guid policyId)
         {
-            foreach (InsurancePolicy policyInList in _policies)
+            foreach (IEntity policyInList in _policies)
             {
                 if (policyInList.Id == policyId)
-                    return policyInList;
+                    return policyInList as IInsurancePolicy;
             }
 
             return null;
         }
 
-        private InsurancePolicy Find(InsurancePolicy policy)
+        private IInsurancePolicy Find(Name companyName, PolicyNumber policyNumber)
         {
-            foreach (InsurancePolicy policyInList in _policies)
+            foreach (IInsurancePolicy policyInList in _policies)
             {
-                if (policyInList.Equals(policy))
+                if (policyInList.CompanyName.Equals(companyName) && policyInList.PolicyNumber.Equals(policyInList))
                     return policyInList;
             }
 

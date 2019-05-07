@@ -1,6 +1,7 @@
 ﻿using Bliss.Application.DTO;
 using Bliss.Application.Repositories;
 using Bliss.Domain.Patients;
+using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -47,7 +48,7 @@ namespace Bliss.Application.Consultations.Commands
             }
             else
             {
-                //update
+               
             }
 
             return new CreateConsultationResult();
@@ -72,7 +73,9 @@ namespace Bliss.Application.Consultations.Commands
 
             patient.AddGender(patientDTO.Gender);
 
-            patient.AddAddress(patientDTO.Street1, patientDTO.Street2, patientDTO.City, patientDTO.State, patientDTO.Zip);
+            Address address = new Address(patientDTO.Street1, patientDTO.Street2, patientDTO.City, patientDTO.State, patientDTO.Zip);
+
+            patient.AddAddress(address);
 
 
             //Add patient insurance information

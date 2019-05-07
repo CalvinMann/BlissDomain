@@ -52,15 +52,30 @@ namespace Bliss.Domain.Tests.UnitTests
         }
 
         [Fact]
+        public void Date_LoadedWithDateTime_shouldhave_day_month_year()
+        {
+            DateTime now = DateTime.Now;
+
+            Date date = new Date(now);
+
+            Assert.Equal(date.Day, now.Day);
+            Assert.Equal(date.Month, now.Month);
+            Assert.Equal(date.Year, now.Year);
+
+
+        }
+
+        [Fact]
         public void Date_shouldthrowerror_ifmonthgreaterthan12_OnValidate()
         {
             int month = 13; //error here
             int day = 12;
             int year = 2019;
 
-            var validationErrors = new Date(day, month, year).Validate();
+            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
 
-            Assert.Single( validationErrors);
+            Assert.Equal(ex.GetType(), typeof(Exception));
+
         }
 
         [Fact]
@@ -70,9 +85,9 @@ namespace Bliss.Domain.Tests.UnitTests
             int day = 12;
             int year = 2019;
 
-            var validationErrors = new Date(day, month, year).Validate();
+            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
 
-            Assert.Single(validationErrors);
+            Assert.Equal(ex.GetType(), typeof(Exception));
         }
 
         [Fact]
@@ -82,10 +97,10 @@ namespace Bliss.Domain.Tests.UnitTests
             int day = 32; //error here
             int year = 2019;
 
-            var validationErrors = new Date(day, month, year).Validate();
+            var validationErrors = new Date(day, month, year);
+            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
 
-            Assert.Single(validationErrors);
-            Assert.Equal("Day cannot be greater than 31", validationErrors[0].ErrorMessage);
+            Assert.Equal(ex.GetType(), typeof(Exception));
         }
 
         [Fact]
@@ -95,14 +110,27 @@ namespace Bliss.Domain.Tests.UnitTests
             int day = 0; //error here
             int year = 2019;
 
-            var validationErrors = new Date(day, month, year).Validate();
+            var validationErrors = new Date(day, month, year);
+            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
 
-            Assert.Single(validationErrors);
-            Assert.Equal("Day cannot be less than 0", validationErrors[0].ErrorMessage);
+            Assert.Equal(ex.GetType(), typeof(Exception));
         }
 
         [Fact]
-        public void Availability_shouldhave_date_zone_timespan()
+        public void Date_shouldthrowerror_ifyearlessthanFourDigits()
+        {
+            int month = 10;
+            int day = 1; 
+            int year = 19; //error here
+
+            var validationErrors = new Date(day, month, year);
+            Exception ex = Assert.Throws<Exception>(() => new Date(day, month, year));
+
+            Assert.Equal(ex.GetType(), typeof(Exception));
+        }
+
+        [Fact]
+        public void Availability_shouldhave_date_zone_timespanmapping()
         {
             int month = 4;
             int day = 12;
@@ -112,15 +140,37 @@ namespace Bliss.Domain.Tests.UnitTests
             Zone zone = new Zone("America/Los_Angeles");
             Time startTime = new Time(9, 0, 0); //9am
             Duration duration = new Duration(0, 0, 0, 0, 1, 0, 0);
+
             Availability availability = new Availability(date, zone, startTime, duration);
 
-
+            Assert.Equal(date, availability.Date);
+            Assert.Equal(zone, availability.Zone);
+            Assert.Equal(startTime, availability.StartTime);
+            Assert.Equal(duration, availability.Duration);
 
             //var zone = DateTimeZoneProviders.Tzdb["Europe/London"];
             //var clock = SystemClock.Instance.InZone(zone);
             //var now = clock.GetCurrentZonedDateTime();
             //var pattern = ZonedDateTimePattern.ExtendedFormatOnlyIso;
             //Console.WriteLine(pattern.Format(now));
+
+        }
+
+        [Fact]
+        public void Availability_shouldthrowErrorOnValidationWithMissingData()
+        {
+            int month = 4;
+            int day = 12;
+            int year = 2019;
+
+            Date date = new Date(day, month, year);
+            Zone zone = new Zone(""); //error here
+            Time startTime = new Time(9, 0, 0); 
+            Duration duration = new Duration(0, 0, 0, 0, 1, 0, 0);
+
+            Availability availability = new Availability(date, zone, startTime, duration);
+
+            Assert.Single(availability.Validate());
 
         }
 

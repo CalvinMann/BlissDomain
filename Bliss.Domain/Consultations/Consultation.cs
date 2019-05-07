@@ -1,5 +1,6 @@
 ﻿using Bliss.Domain.Core;
 using Bliss.Domain.Evaluations;
+using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Bliss.Domain.Consultations
 {
     public sealed class Consultation : IAggregateRoot, ISubmitConsultationValidation
     {
+
         private Availabilities _availabilities;
 
         #region Constructors
@@ -56,11 +58,11 @@ namespace Bliss.Domain.Consultations
         //References to Entities 
         public IEvaluation Evaluation { private set; get; }
 
-        public IReadOnlyCollection<Availability> Availabilities
+        public IReadOnlyCollection<IAvailability> Availabilities
         {
             get
             {
-                IReadOnlyCollection<Availability> readOnly = _availabilities.GetAvailabilities();
+                IReadOnlyCollection<IAvailability> readOnly = _availabilities.GetAvailabilities();
                 return readOnly;
             }
         }
@@ -75,6 +77,11 @@ namespace Bliss.Domain.Consultations
                 throw new Exception("Patient Id is null");
 
             PatientId = patientId;
+        }
+
+        public void AddAvailability(Date date, Zone zone, Time startTime, Duration duration)
+        {
+            _availabilities.AddAvailability(date, zone, startTime, duration);
         }
 
         public void AssignSupplier(Guid supplierId)

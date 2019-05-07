@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Bliss.Domain.Patients
 {
-    public sealed class Addresses : ISubmitConsultationValidation
+    internal sealed class Addresses : ISubmitConsultationValidation
     {
         private readonly IList<Address> _addresses;
 
@@ -24,10 +24,8 @@ namespace Bliss.Domain.Patients
             return addresses;
         }
 
-        public Address AddAddress(string street1, string street2, string city, State state, ZipCode zip)
+        public Address AddAddress(Address address)
         {
-            Address address = new Address(street1, street2, city, state, zip);
-
             if (DoesDuplicateAddressExist(address) == false)
                 _addresses.Add(address);
 
