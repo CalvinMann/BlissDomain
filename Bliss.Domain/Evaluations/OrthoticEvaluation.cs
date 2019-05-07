@@ -1,4 +1,5 @@
 ﻿using Bliss.Domain.Core;
+using Bliss.Domain.Evaluations.Components.Complaint;
 using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Bliss.Domain.Evaluations
             Id = Guid.NewGuid();
             EvaluationType = evaluationType;
             CreationDate = new Date(DateTime.Now);
+            LastUpdatedDate = CreationDate;
         }
 
         public Guid Id { private set; get; }
@@ -24,5 +26,12 @@ namespace Bliss.Domain.Evaluations
         public Date CreationDate { private set; get; }
 
         public Date LastUpdatedDate { private set; get; }
+
+        public IComplaint Complaint { private set; get; }
+
+        public void AddComplaint()
+        {
+            
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Bliss.Domain.Tests.UnitTests
     public class EvaluationTests
     {
         [Fact]
-        public void CreatedEvaluationShouldHaveAnId()
+        public void CreatedOrthoticEvaluationShouldHaveAnId()
         {
 
             OrthoticEvaluation orthoticEvaluation = new OrthoticEvaluation(EvaluationType.Orthotic);
@@ -21,5 +21,7 @@ namespace Bliss.Domain.Tests.UnitTests
             Assert.NotNull(orthoticEvaluation.LastUpdatedDate);
             Assert.Same(orthoticEvaluation.CreationDate, orthoticEvaluation.LastUpdatedDate);
         }
+
+      
     }
 }
