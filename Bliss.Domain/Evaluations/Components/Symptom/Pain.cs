@@ -1,4 +1,5 @@
 ﻿using Bliss.Domain.Core;
+using Bliss.Domain.Evaluations.Components.Treatments;
 using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -8,20 +9,25 @@ namespace Bliss.Domain.Evaluations.Components.Symptom
 {
     public class Pain : IEntity, IPain
     {
-        private Symptom _symptom;
 
         public Pain()
         {
             Id = Guid.NewGuid();
 
-            _symptom = new Symptom();
-           
         }
 
         public Guid Id { private set; get; }
 
-        public PainLevel PainLevel => throw new NotImplementedException();
+        public PainLevel PainLevel {  set; get ; }
 
-        public Frequency Frequency => throw new NotImplementedException();
+        public Frequency Frequency { set; get; }
+
+        public string Description { set; get; }
+
+        public SymptomBodyLocation BodyLocation { set; get; }
+
+        public TimePeriod SymptomPeriod { set; get; }
+
+        public ITreatment AppliedTreatment { set; get; }
     }
 }
