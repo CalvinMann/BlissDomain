@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bliss.Domain.Evaluations.Components.Medication
+namespace Bliss.Domain.Evaluations.Components.Medications
 {
     public enum MedicationType
     {

@@ -10,7 +10,7 @@ namespace Bliss.Domain.Evaluations.Components.Treatments
     public class Medicine : IEntity, IMedicineTreatment
     {
 
-        public Medicine(Meds.Medication medication)
+        protected Medicine(Meds.Medication medication)
         {
             Id = Guid.NewGuid();
             Medication = medication;

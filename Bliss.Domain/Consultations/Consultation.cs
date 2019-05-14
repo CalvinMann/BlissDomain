@@ -13,32 +13,36 @@ namespace Bliss.Domain.Consultations
         private Availabilities _availabilities;
 
         #region Constructors
-        public Consultation()
-        {
-            //init
-            Id = Guid.NewGuid();
-            _availabilities = new Availabilities();
 
+        private Consultation() { }
+
+        public static Consultation New()
+        {
+            Consultation consultation = new Consultation()
+            {
+                Id = Guid.NewGuid(),
+                _availabilities = new Availabilities()
+            };
+
+            return consultation;
         }
 
-
-        private Consultation(Guid id, Guid patientId, Guid clincianGroupId, Guid supplierId, IEvaluation evaluation, Availabilities availabilities)
-        {
-            //assign
-            Id = id;
-            PatientId = patientId;
-            ClinicianGroupId = clincianGroupId;
-            SupplierId = supplierId;
-            Evaluation = evaluation;
-            _availabilities = availabilities;
-
-        } 
         #endregion
 
         #region Factories
-        public static Consultation Create(Guid id, Guid patientId, Guid providerId, Guid supplierId, IEvaluation evaluation, Availabilities availabilities)
+
+        public static Consultation Load(Guid id, Guid patientId, Guid clincianGroupId, Guid supplierId, IEvaluation evaluation, Availabilities availabilities)
         {
-            Consultation consultation = new Consultation(id, patientId, providerId, supplierId, evaluation, availabilities);
+            Consultation consultation = new Consultation()
+            {
+                Id = id,
+                PatientId = patientId,
+                ClinicianGroupId = clincianGroupId,
+                SupplierId = supplierId,
+                Evaluation = evaluation,
+                _availabilities = availabilities
+
+            };
 
             return consultation;
         } 

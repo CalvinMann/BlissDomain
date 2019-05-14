@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Bliss.Domain.Evaluations.Components.Surgeries
 {
-    public enum SurgeryType
+    public interface ISurgery
     {
-
     }
 }

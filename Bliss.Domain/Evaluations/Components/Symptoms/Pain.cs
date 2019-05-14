@@ -28,6 +28,5 @@ namespace Bliss.Domain.Evaluations.Components.Symptom
 
         public TimePeriod SymptomPeriod { set; get; }
 
-        public ITreatment AppliedTreatment { set; get; }
     }
 }

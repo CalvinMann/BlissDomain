@@ -1,5 +1,7 @@
 ﻿using Bliss.Domain.Core;
-using Bliss.Domain.Evaluations.Components.Complaint;
+using Bliss.Domain.Evaluations.Components.Medications;
+using Bliss.Domain.Evaluations.Components.Symptom;
+using Bliss.Domain.Evaluations.Components.Treatments;
 using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -9,14 +11,27 @@ namespace Bliss.Domain.Evaluations
 {
     public class OrthoticEvaluation : IAggregateRoot, IEvaluation
     {
+        private Symptoms _symptoms;
+        private Medications _medications;
+        private Treatments _treatments;
 
-        public OrthoticEvaluation(EvaluationType evaluationType)
+        private OrthoticEvaluation() { }
+
+        public static OrthoticEvaluation New(EvaluationType evaluationType)
         {
-            //init 
-            Id = Guid.NewGuid();
-            EvaluationType = evaluationType;
-            CreationDate = new Date(DateTime.Now);
-            LastUpdatedDate = CreationDate;
+            OrthoticEvaluation orthoticEvaluation = new OrthoticEvaluation()
+            {
+                //init 
+                Id = Guid.NewGuid(),
+                EvaluationType = evaluationType,
+                CreationDate = new Date(DateTime.Now),
+                _symptoms = new Symptoms(),
+                _medications = new Medications(),
+                _treatments = new Treatments()
+
+        };
+
+            return orthoticEvaluation;
         }
 
         public Guid Id { private set; get; }
@@ -25,13 +40,38 @@ namespace Bliss.Domain.Evaluations
 
         public Date CreationDate { private set; get; }
 
-        public Date LastUpdatedDate { private set; get; }
+        public Complaint ChiefComplaint { private set; get; }
 
-        public IComplaint Complaint { private set; get; }
-
-        public void AddComplaint()
+        public IReadOnlyCollection<ISymptom> Symptoms
         {
-            
+            get
+            {
+                IReadOnlyCollection<ISymptom> readOnly = _symptoms.GetSymptoms();
+                return readOnly;
+            }
+        }
+
+        public IReadOnlyCollection<IMedication> Medications
+        {
+            get
+            {
+                IReadOnlyCollection<IMedication> readOnly = _medications.GetMedications();
+                return readOnly;
+            }
+        }
+
+        public IReadOnlyCollection<ITreatment> Treatments
+        {
+            get
+            {
+                IReadOnlyCollection<ITreatment> readOnly = _treatments.GetTreatments();
+                return readOnly;
+            }
+        }
+
+        public void AddComplaint(Complaint complaint)
+        {
+            ChiefComplaint = complaint;
         }
     }
 }

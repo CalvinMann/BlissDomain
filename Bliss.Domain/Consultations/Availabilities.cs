@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Bliss.Domain.Consultations
 {
-    public sealed class Availabilities
+    public class Availabilities
     {
         private readonly IList<IAvailability> _availabilities;
 

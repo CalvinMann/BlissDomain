@@ -11,6 +11,5 @@ namespace Bliss.Domain.Evaluations
 
         Date CreationDate { get; }
 
-        Date LastUpdatedDate { get; }
     }
 }

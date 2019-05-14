@@ -19,12 +19,21 @@ namespace Bliss.Domain.ValueObjects
             Year = dateTime.Year;
         }
 
+
         public Date(int day, int month, int year)
         {
             Day = day;
             Month = month;
             Year = year;
         }
+
+        public Date(Date date)
+        {
+            //Day = day;
+            //Month = month;
+            //Year = year;
+        }
+
 
         //these are the fields we use to test equality
         protected override IEnumerable<object> GetEqualityComponents()

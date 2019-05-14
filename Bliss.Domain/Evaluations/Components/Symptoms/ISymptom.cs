@@ -15,7 +15,5 @@ namespace Bliss.Domain.Evaluations.Components.Symptom
         TimePeriod SymptomPeriod { set; get; }
 
         Frequency Frequency { get; set; }
-
-        ITreatment AppliedTreatment { get; set; }
     }
 }

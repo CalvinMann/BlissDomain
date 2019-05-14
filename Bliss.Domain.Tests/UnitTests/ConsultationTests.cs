@@ -15,7 +15,7 @@ namespace Bliss.Domain.Tests.UnitTests.Intake
         {
             Guid patientId = Guid.NewGuid();
 
-            Consultation consultation = new Consultation();
+            Consultation consultation = Consultation.New();
             consultation.AssignPatient(patientId);
 
 
@@ -28,7 +28,7 @@ namespace Bliss.Domain.Tests.UnitTests.Intake
         [Fact]
         public void GivenANullPatientIdIsAssigned_ThenErrorShouldThrow()
         {
-            Consultation consultation = new Consultation();
+            Consultation consultation = Consultation.New();
 
             Exception ex = Assert.Throws<Exception>(() => consultation.AssignPatient(Guid.Empty));
                
@@ -38,8 +38,8 @@ namespace Bliss.Domain.Tests.UnitTests.Intake
         [Fact]
         public void GivenAPatientIdIsAssigned_ConsultationShouldHaveValidReference()
         {
-      
-            Consultation consultation = new Consultation();
+
+            Consultation consultation = Consultation.New();
             Guid patientId = Guid.NewGuid();
 
             consultation.AssignPatient(patientId);
@@ -60,7 +60,7 @@ namespace Bliss.Domain.Tests.UnitTests.Intake
         public void AfterAddingAvailability_ConsultationAvailabilitiesShouldHaveCount()
         {
 
-            Consultation consultation = new Consultation();
+            Consultation consultation = Consultation.New();
 
             Date date = new Date(4, 12, 1987);
             Zone zone = new Zone("America/Los_Angeles");
@@ -77,7 +77,7 @@ namespace Bliss.Domain.Tests.UnitTests.Intake
         public void AfterAddingSameAvailability_ConsultationAvailabilitiesShouldNotAddAvailability()
         {
 
-            Consultation consultation = new Consultation();
+            Consultation consultation = Consultation.New();
 
             Date date = new Date(4, 12, 1987);
             Zone zone = new Zone("America/Los_Angeles");
