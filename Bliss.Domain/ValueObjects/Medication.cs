@@ -5,7 +5,7 @@ using Bliss.Domain.Core;
 using Bliss.Domain.Evaluations.Components.Medications;
 using Bliss.Domain.ValueObjects;
 
-namespace Bliss.Domain.Evaluations.Components.Medication
+namespace Bliss.Domain.ValueObjects
 {
     public class Medication : ValueObject, IMedication
     {

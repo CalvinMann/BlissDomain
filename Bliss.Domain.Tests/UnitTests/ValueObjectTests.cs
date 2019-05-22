@@ -90,6 +90,8 @@ namespace Bliss.Domain.Tests.UnitTests
             Assert.Equal(ex.GetType(), typeof(Exception));
         }
 
+      
+
         [Fact]
         public void Date_shouldthrowerror_ifdaygreaterthan31()
         {
@@ -128,6 +130,7 @@ namespace Bliss.Domain.Tests.UnitTests
 
             Assert.Equal(ex.GetType(), typeof(Exception));
         }
+
 
         [Fact]
         public void Availability_shouldhave_date_zone_timespanmapping()

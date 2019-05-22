@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bliss.Domain.Evaluations.Components.Symptom
 {
-    public interface IPain : ISymptom
+    public interface IPain
     {
         PainLevel PainLevel { get; }
     }

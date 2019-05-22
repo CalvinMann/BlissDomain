@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bliss.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -21,11 +22,16 @@ namespace Bliss.Domain.Evaluations.Components.Treatments
             return treatments;
         }
 
-        public ITreatment AddTreatment()
+        public void AddMedicine(Medication medication, Frequency frequency, TimePeriod treatmentPeriod )
         {
-            throw new NotImplementedException();
 
+            Medicine medicine = new Medicine( medication);
+            medicine.TreatmentPeriod = treatmentPeriod;
+            medicine.Frequency = frequency;
+
+            _treatments.Add(medicine);
         }
+
 
         public void RemoveTreatment(Guid id)
         {

@@ -7,7 +7,7 @@ namespace Bliss.Domain.ValueObjects
 {
     public class Frequency : ValueObject
     {
-        public Frequency(int quantity, UnitsNet.Units.DurationUnit duration)
+        public Frequency(int quantity, Duration duration)
         {
             Quantity = quantity;
             Duration = duration;
@@ -15,7 +15,7 @@ namespace Bliss.Domain.ValueObjects
 
         public int Quantity { get; }
 
-        public UnitsNet.Units.DurationUnit Duration { get; }
+        public Duration Duration { get; }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {

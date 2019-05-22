@@ -8,12 +8,12 @@ namespace Bliss.Domain.Evaluations.Components.Symptom
 {
     public interface ISymptom
     {
-        string Description { set; get; }
+        string Description {  get; }
 
-        SymptomBodyLocation BodyLocation { set; get; }
+        SymptomBodyLocation BodyLocation {  get; }
 
-        TimePeriod SymptomPeriod { set; get; }
+        TimePeriod SymptomPeriod {  get; }
 
-        Frequency Frequency { get; set; }
+        Frequency Frequency { get;  }
     }
 }

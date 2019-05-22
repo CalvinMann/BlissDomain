@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bliss.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -20,20 +21,14 @@ namespace Bliss.Domain.Evaluations.Components.Symptom
             return symptoms;
         }
 
-        public ISymptom AddSymptom()
+      
+
+        public void AddPainSymptom(PainLevel painLevel, Frequency frequency, string description, SymptomBodyLocation bodyLocation, TimePeriod symptomPeriod)
         {
-            throw new NotImplementedException();
+            Pain pain = new Pain(painLevel, frequency, description, bodyLocation, symptomPeriod);
+      
 
-            //ISymptom sympotms = new ISymptom(date, zone, startTime, duration);
-
-            //ISymptom existingSymptoms = Find(sympotms);
-
-            //if (existingSymptoms == null)
-            //    _symptoms.Add(sympotms);
-            //else
-            //    return existingSymptoms;
-
-            //return sympotms;
+            _symptoms.Add(pain);
         }
 
         public void RemoveSymptom(Guid id)

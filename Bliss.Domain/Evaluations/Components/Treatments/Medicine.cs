@@ -3,22 +3,24 @@ using Bliss.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Meds = Bliss.Domain.Evaluations.Components.Medication;
 
 namespace Bliss.Domain.Evaluations.Components.Treatments
 {
-    public class Medicine : IEntity, IMedicineTreatment
+    public class Medicine : IEntity, IMedicine, ITreatment
     {
 
-        protected Medicine(Meds.Medication medication)
+        public Medicine(Medication medication)
         {
+            TreatmentType = TreatmentType.Medicine;
             Id = Guid.NewGuid();
             Medication = medication;
         }
 
         public Guid Id { private set; get; }
 
-        public Meds.Medication Medication { private set; get; }
+        public Medication Medication { private set; get; }
+
+        public TreatmentType TreatmentType { private set; get; }
 
         public Frequency Frequency { set; get; }
 

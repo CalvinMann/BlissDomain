@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bliss.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -20,10 +21,11 @@ namespace Bliss.Domain.Evaluations.Components.Surgeries
             return surgeries;
         }
 
-        public ISurgery AddSurgery()
+        public void AddSurgery(Date dateOfSurgery, SurgeryType surgeryType, string description)
         {
-            throw new NotImplementedException();
+            Surgery surgery = new Surgery(dateOfSurgery, surgeryType, description);
 
+            _surgeries.Add(surgery);
         }
 
         public void RemoveSurgery(Guid id)

@@ -9,5 +9,7 @@ namespace Bliss.Domain.Evaluations.Components.Biometrics
          UnitsNet.Length Waist { set; get; }
 
          UnitsNet.Length Height { set; get; }
+
+        UnitsNet.Length ShoeSize { set; get; }
     }
 }

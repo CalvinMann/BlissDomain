@@ -21,7 +21,7 @@ namespace Bliss.Domain.Consultations
             return availabilities;
         }
 
-        public IAvailability AddAvailability(Date date, Zone zone, Time startTime, Duration duration)
+        public void AddAvailability(Date date, Zone zone, Time startTime, Duration duration)
         {
             IAvailability availability = new Availability(date, zone, startTime, duration);
 
@@ -29,10 +29,10 @@ namespace Bliss.Domain.Consultations
 
             if (existingAvailability == null)
                 _availabilities.Add(availability);
-            else
-                return existingAvailability;
+            //else
+            //    return existingAvailability;
 
-            return availability;
+            //return availability;
         }
 
         public void RemoveAvailability(Guid id)

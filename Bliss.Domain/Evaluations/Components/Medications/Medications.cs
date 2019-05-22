@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bliss.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -20,10 +21,12 @@ namespace Bliss.Domain.Evaluations.Components.Medications
             return medication;
         }
 
-        public IMedication AddMedication()
+        public void AddMedication(string name, MedicationType medicationType, string manufacturingCompany,
+            Date expirationDate, Dosage dosage, Frequency dosageFrequency)
         {
-            throw new NotImplementedException();
 
+            Medication medication = new Medication(name, medicationType, manufacturingCompany,
+             expirationDate, dosage, dosageFrequency);
         }
 
         public void RemoveMedication(Guid id)
