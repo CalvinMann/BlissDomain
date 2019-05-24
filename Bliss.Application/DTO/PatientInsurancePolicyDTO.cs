@@ -10,7 +10,7 @@ namespace Bliss.Application.DTO
         public PatientInsurancePolicyDTO(string companyName
             , string policyNumber
             , string street1, string street2
-            , string city, string state, int zip
+            , string city, string state, string zip
             , string customerServicePhoneNumber)
         {
             CompanyName = companyName;
@@ -31,7 +31,7 @@ namespace Bliss.Application.DTO
         public string Street2 { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
-        public int Zip { get; private set; }
+        public string Zip { get; private set; }
         public string CustomerServicePhoneNumber { get; private set; }
     }
 }
